@@ -16,7 +16,7 @@ export class FollowController {
     @Param('restaurantId') restaurantId: string,
     @Req() request: IUserRequest,
   ) {
-    return this.followService.create({ restaurantId: new Types.ObjectId(restaurantId), userId: request.user.id });
+    return this.followService.create({ restaurantId: new Types.ObjectId(restaurantId), userId: new Types.ObjectId(request.user._id as string) });
   }
 
   @Get("/restaurant/:restaurantId")
@@ -53,6 +53,6 @@ export class FollowController {
     @Param('restaurantId') restaurantId: string,
     @Req() request: IUserRequest,
   ) {
-    return this.followService.remove({ restaurantId: new Types.ObjectId(restaurantId), userId: request.user.id });
+    return this.followService.remove({ restaurantId: new Types.ObjectId(restaurantId), userId: new Types.ObjectId(request.user._id as string) });
   }
 }

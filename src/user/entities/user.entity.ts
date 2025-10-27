@@ -33,20 +33,20 @@ class SocialLinks {
 @Schema({ _id: false })
 class Profile {
 
-    @Prop()
-    bio: string;
+    @Prop({ required: false })
+    bio?: string;
 
-    @Prop()
-    shortBio: string;
+    @Prop({ required: false })
+    shortBio?: string;
 
-    @Prop()
-    dateOfBirth: Date;
+    @Prop({ required: false })
+    dateOfBirth?: Date;
 
-    @Prop({ type: Address })
-    address: Address;
+    @Prop({ type: Address, required: false })
+    address?: Address;
 
-    @Prop({ type: SocialLinks })
-    socialLinks: SocialLinks;
+    @Prop({ type: SocialLinks, required: false })
+    socialLinks?: SocialLinks;
 
     @Prop({ type: Number, required: true, default: 0 })
     totalFollowing: number
@@ -54,11 +54,12 @@ class Profile {
 
 @Schema({ _id: false })
 class Preferences {
-    @Prop()
-    language: string;
+    @Prop({ required: false, default: "en" })
+    language?: string;
 
-    @Prop()
-    darkMode: boolean;
+    @Prop({ required: false, default: false })
+    darkMode?: boolean;
+
     @Prop({ type: [mongoose.Schema.Types.ObjectId], ref: 'Cuisine' })
     favoriteCuisinesIds: Types.ObjectId[];
 }
@@ -95,8 +96,8 @@ export class User extends Document {
     @Prop({ type: Preferences })
     preferences: Preferences;
 
-    @Prop()
-    lastLogin: Date;
+    @Prop({ required: false })
+    lastLogin?: Date;
 
     @Prop({ default: Roles.USER })
     role: Roles;

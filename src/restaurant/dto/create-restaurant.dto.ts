@@ -16,7 +16,7 @@ export class CreateRestaurantDto {
     @ApiProperty({ example: 'kfc' })
     @IsString()
     @IsNotEmpty()
-    uniqueName: string;
+    slug: string;
 
     @ApiProperty({ example: ['Asian', 'Burgers'], isArray: true })
     @IsArray()

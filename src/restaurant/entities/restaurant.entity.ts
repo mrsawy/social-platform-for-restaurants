@@ -10,10 +10,10 @@ export class Restaurant extends Document {
     @Prop({ required: true })
     nameAr: string;
 
-    @Prop({ required: true, type: String })
+    @Prop({ required: false, type: String })
     descriptionEn: string;
 
-    @Prop({ required: true, type: String })
+    @Prop({ required: false, type: String })
     descriptionAr: string;
 
     @Prop({ required: true, type: mongoose.Types.ObjectId })

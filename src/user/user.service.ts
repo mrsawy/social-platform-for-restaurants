@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -13,13 +13,19 @@ export class UserService {
     private userModel: PaginateModel<User>
   ) { }
   async create(createUserDto: CreateUserDto) {
-    const hashedPassword = await bcrypt.hash(createUserDto.password, process.env.SALT_ROUNDS);
-    return await this.userModel.create({ ...createUserDto, password: hashedPassword });
+    try {
+
+      const hashedPassword = await bcrypt.hash(createUserDto.password, Number(process.env.SALT_ROUNDS));
+      return await this.userModel.create({ ...createUserDto, password: hashedPassword });
+    } catch (error) {
+      if (error.code === 11000) {
+        const field = Object.keys(error.keyValue)[0];
+        throw new ConflictException(`${field} "${error.keyValue[field]}" already exists.`);
+      }
+      throw error;
+    }
   }
 
-  findAll() {
-    return `This action returns all user`;
-  }
 
   async findOne(identifier: string) {
     let foundedUser: User | null = null;
@@ -175,6 +181,7 @@ export class UserService {
         }
       }
     ]);
+    console.log('Recommendation Aggregation Result:', JSON.stringify(result, null, 2), { result });
 
     return result[0] || { similarUsers: [], recommendedRestaurants: [] };
   }

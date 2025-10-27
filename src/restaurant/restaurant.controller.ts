@@ -37,7 +37,7 @@ export class RestaurantController {
         'One or more cuisine IDs are invalid or inactive'
       );
     }
-    const userId = request.user.id.toString()
+    const userId = request.user._id
     return this.restaurantService.create({ ...createRestaurantDto, createdById: new Types.ObjectId(userId as string) });
   }
 
@@ -103,7 +103,7 @@ export class RestaurantController {
       }
     }
     const foundedRestaurant = await this.restaurantService.findOne(id);
-    if (foundedRestaurant.createdById !== request.user.id) throw new UnauthorizedException("Unauthorized to edit this restaurant")
+    if (foundedRestaurant.createdById !== request.user._id) throw new UnauthorizedException("Unauthorized to edit this restaurant")
 
     return await this.restaurantService.update(id, updateRestaurantDto);
   }
