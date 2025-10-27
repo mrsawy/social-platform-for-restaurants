@@ -1,98 +1,592 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🍽️ Pleny - Restaurant Management & Social Platform API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A comprehensive NestJS-based REST API for managing restaurants with social features, geospatial queries, and intelligent recommendation system.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+[![Node.js](https://img.shields.io/badge/Node.js-23+-green.svg)](https://nodejs.org/)
+[![NestJS](https://img.shields.io/badge/NestJS-10+-red.svg)](https://nestjs.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-5.0+-green.svg)](https://www.mongodb.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 📋 Table of Contents
 
-## Project setup
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Database Seeding](#database-seeding)
+- [API Documentation](#api-documentation)
+- [Project Structure](#project-structure)
+- [Key Features Explained](#key-features-explained)
+- [API Endpoints](#api-endpoints)
+- [Testing](#testing)
+- [Deployment](#deployment)
+
+---
+
+## 🎯 Overview
+
+Pleny is a social network for food lovers that combines restaurant management with social features. Users can discover restaurants, follow their favorites, and get personalized recommendations based on cuisine preferences and social connections.
+
+### Key Highlights
+
+- 🏪 **Restaurant Management** - Create, update, and manage restaurant profiles
+- 🗺️ **Geospatial Queries** - Find nearby restaurants within custom radius
+- 👥 **Social Features** - Follow restaurants and discover what others are following
+- 🤖 **Smart Recommendations** - AI-powered suggestions based on user preferences
+- 🍜 **Cuisine System** - Multi-cuisine support with validation
+- 🔐 **Authentication** - JWT-based secure authentication
+- 📊 **Advanced Aggregations** - MongoDB pipeline for complex queries
+
+---
+
+## ✨ Features
+
+### Restaurant Management
+- ✅ Create restaurants with bilingual support (English/Arabic)
+- ✅ Support 1-3 cuisines per restaurant
+- ✅ Unique slug-based identification
+- ✅ Geospatial location tracking
+- ✅ Follower count tracking
+
+### User Features
+- ✅ User registration and authentication
+- ✅ Favorite cuisine preferences
+- ✅ Follow/unfollow restaurants
+- ✅ Personal profile management
+- ✅ Social links integration
+
+### Search & Discovery
+- ✅ Filter restaurants by multiple cuisines
+- ✅ Find nearby restaurants (geospatial queries)
+- ✅ Pagination support
+- ✅ Search by name or slug
+
+### Recommendations Engine
+- ✅ Find users with similar taste
+- ✅ Discover restaurants based on social connections
+- ✅ MongoDB aggregation pipeline implementation
+- ✅ Real-time recommendation updates
+
+---
+
+## 🛠 Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| **NestJS** | Backend framework with TypeScript |
+| **Express.js** | HTTP server |
+| **MongoDB** | NoSQL database |
+| **Mongoose** | ODM for MongoDB |
+| **JWT** | Authentication tokens |
+| **Swagger** | API documentation |
+| **Faker.js** | Test data generation |
+| **bcrypt** | Password hashing |
+| **class-validator** | DTO validation |
+
+---
+
+## 📋 Prerequisites
+
+- **Node.js v23+** (for native TypeScript support)
+- **MongoDB v5.0+** (local or Atlas)
+- **pnpm** (package manager)
+- **Git**
+
+---
+
+## 🚀 Installation
+
+### 1. Clone the Repository
 
 ```bash
-$ pnpm install
+git clone https://github.com/yourusername/pleny-restaurant-api.git
+cd pleny-restaurant-api
 ```
 
-## Compile and run the project
+### 2. Install Dependencies
 
 ```bash
-# development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+pnpm install
 ```
 
-## Run tests
+### 3. Environment Setup
+
+Create a `.env` file in the root directory:
+
+```env
+# Server Configuration
+PORT=3000
+NODE_ENV=development
+
+# Database
+MONGODB_URI_DEV=mongodb://localhost:27017/pleny_restaurant_dev
+MONGODB_URI_PROD=mongodb+srv://username:password@cluster.mongodb.net/pleny_prod
+
+# Authentication
+JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
+JWT_EXPIRES_IN=3d
+SALT_ROUNDS=10
+```
+
+### 4. Start MongoDB
+
+**Local MongoDB:**
+```bash
+# Linux
+sudo systemctl start mongod
+
+# macOS
+brew services start mongodb-community
+
+# Windows
+net start MongoDB
+```
+
+**Or use MongoDB Atlas** (cloud database) and update `MONGODB_URI_DEV` in `.env`
+
+### 5. Run the Application
 
 ```bash
-# unit tests
-$ pnpm run test
+# Development mode
+pnpm start:dev
 
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
+# Production mode
+pnpm build
+pnpm start:prod
 ```
 
-## Deployment
+The API will be available at:
+- **API Server**: http://localhost:3000
+- **Swagger Docs**: http://localhost:3000/api/docs
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+---
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+## ⚙️ Configuration
+
+### Environment Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `PORT` | Server port | `3000` |
+| `MONGODB_URI_DEV` | Development database URL | Required |
+| `MONGODB_URI_PROD` | Production database URL | Optional |
+| `JWT_SECRET` | Secret key for JWT | Required |
+| `JWT_EXPIRES_IN` | Token expiration time | `3d` |
+| `SALT_ROUNDS` | bcrypt salt rounds | `10` |
+
+---
+
+## 🌱 Database Seeding
+
+The project includes a comprehensive seeding system to populate your database with test data.
+
+### Seed Data Includes:
+- 12 Cuisines (Asian, Italian, Mexican, etc.)
+- 20 Restaurants with realistic names
+- 50 Users with profiles
+- Automatic follow relationships
+
+### Run Seeding
 
 ```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
+# Clear database (⚠️ WARNING: Deletes all data)
+pnpm db:clear
+
+# Seed database
+pnpm db:seed
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### Seeding Output:
+```
+🌱 Starting database seeding...
+🧹 Clearing existing data...
+✓ Database cleared
+🍜 Seeding cuisines...
+✓ Created 12 cuisines
+👥 Seeding users...
+✓ Created 50 users
+🍽️ Seeding restaurants...
+✓ Created 20 restaurants
+❤️ Seeding follows...
+✓ Created 250 follows
 
-## Resources
+📊 Seeding Summary:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🍜 Cuisines: 12
+🍽️ Restaurants: 20
+👥 Users: 50
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+---
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## 📚 API Documentation
 
-## Support
+### Swagger UI
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Once the server is running, visit:
+```
+http://localhost:3000/api/docs
+```
 
-## Stay in touch
+Interactive API documentation with:
+- ✅ All endpoints documented
+- ✅ Request/response schemas
+- ✅ Try-it-out functionality
+- ✅ Authentication support
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+---
 
-## License
+## 📁 Project Structure
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```
+pleny-restaurant-api/
+│
+├── src/
+│   ├── auth/                      # Authentication module
+│   │   ├── dto/                   # Login/Register DTOs
+│   │   ├── auth.service.ts        # JWT logic
+│   │   ├── auth.controller.ts     # Auth endpoints
+│   │   └── auth.guard.ts          # JWT guard
+│   │
+│   ├── user/                      # User module
+│   │   ├── entities/              # User schema
+│   │   ├── dto/                   # User DTOs
+│   │   ├── user.service.ts        # User business logic
+│   │   ├── user.controller.ts     # User endpoints
+│   │   └── role.guard.ts          # Role-based guard
+│   │
+│   ├── restaurant/                # Restaurant module
+│   │   ├── entities/              # Restaurant schema
+│   │   ├── dto/                   # Restaurant DTOs
+│   │   ├── restaurant.service.ts  # Restaurant logic
+│   │   └── restaurant.controller.ts
+│   │
+│   ├── cuisine/                   # Cuisine module
+│   │   ├── entities/              # Cuisine schema
+│   │   ├── cuisine.service.ts     # Cuisine logic
+│   │   └── cuisine.controller.ts
+│   │
+│   ├── follow/                    # Follow module
+│   │   ├── entities/              # Follow schema
+│   │   ├── follow.service.ts      # Follow logic
+│   │   └── follow.controller.ts
+│   │
+│   ├── database/
+│   │   └── seeders/               # Database seeding
+│   │       ├── seed.ts
+│   │       ├── clear.ts
+│   │       └── seeders.service.ts
+│   │
+│   ├── app.module.ts              # Root module
+│   └── main.ts                    # Application entry point
+│
+├── .env                           # Environment variables
+├── .gitignore
+├── package.json
+├── tsconfig.json
+├── nest-cli.json
+└── README.md
+```
+
+---
+
+## 🔑 Key Features Explained
+
+### 1. Geospatial Queries
+
+Find restaurants within a radius:
+
+```typescript
+// Find restaurants within 1km
+GET /restaurant/nearby?longitude=31.2357&latitude=30.0444&maxDistance=1000
+```
+
+**How it works:**
+- Restaurants store location as GeoJSON Point
+- MongoDB 2dsphere index for fast queries
+- Customizable radius (default 1km)
+
+### 2. Recommendation System
+
+Get personalized restaurant recommendations:
+
+```typescript
+GET /user/recommendations
+Authorization: Bearer <token>
+```
+
+**Algorithm:**
+1. Find users with shared favorite cuisines
+2. Get restaurants followed by those users
+3. Return both similar users and restaurant suggestions
+
+**MongoDB Aggregation Pipeline:**
+```javascript
+[
+  // Match current user
+  { $match: { _id: userId } },
+  
+  // Find similar users
+  { $lookup: { 
+      from: "users",
+      // Find users with overlapping cuisine preferences
+  }},
+  
+  // Get their followed restaurants
+  { $lookup: { from: "follows" }},
+  
+  // Get full restaurant details
+  { $lookup: { from: "restaurants" }}
+]
+```
+
+### 3. Multi-Cuisine Filtering
+
+Filter restaurants by multiple cuisines:
+
+```typescript
+GET /restaurant?cuisines[]=asian&cuisines[]=burgers&page=1&limit=10
+```
+
+### 4. Follow System with Transactions
+
+Follow/unfollow with atomic operations:
+
+```typescript
+// Follow restaurant
+POST /follow/:restaurantId
+Authorization: Bearer <token>
+
+// Uses MongoDB transactions to ensure:
+// - Follow record created
+// - Restaurant follower count increased
+// - User following count increased
+```
+
+---
+
+## 📡 API Endpoints
+
+### Authentication
+
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| `POST` | `/auth/register` | Register new user | ❌ |
+| `POST` | `/auth/login` | Login user | ❌ |
+
+### Users
+
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| `POST` | `/user` | Create user | ❌ |
+| `GET` | `/user/:id` | Get user by ID | ❌ |
+| `GET` | `/user/recommendations` | Get recommendations | ✅ |
+
+### Restaurants
+
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| `POST` | `/restaurant` | Create restaurant | ✅ |
+| `GET` | `/restaurant` | List restaurants | ❌ |
+| `GET` | `/restaurant/:id` | Get restaurant | ❌ |
+| `GET` | `/restaurant/nearby` | Find nearby | ❌ |
+| `PATCH` | `/restaurant/:id` | Update restaurant | ✅ |
+| `DELETE` | `/restaurant/:id` | Delete restaurant | ✅ |
+
+### Cuisines
+
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| `POST` | `/cuisine` | Create cuisine | ✅ Admin |
+| `GET` | `/cuisine` | List cuisines | ❌ |
+| `GET` | `/cuisine/:id` | Get cuisine | ❌ |
+| `PATCH` | `/cuisine/:id` | Update cuisine | ✅ Admin |
+| `DELETE` | `/cuisine/:id` | Delete cuisine | ✅ Admin |
+
+### Follow
+
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| `POST` | `/follow/:restaurantId` | Follow restaurant | ✅ |
+| `GET` | `/follow/restaurant/:id` | Get restaurant followers | ❌ |
+| `GET` | `/follow/user/:id` | Get user following | ❌ |
+| `DELETE` | `/follow/:restaurantId` | Unfollow restaurant | ✅ |
+
+---
+
+## 🧪 Testing
+
+### Manual Testing with Swagger
+
+1. Start the server: `pnpm start:dev`
+2. Visit: http://localhost:3000/api/docs
+3. Use "Authorize" button to add JWT token
+4. Test endpoints directly from browser
+
+### Example Flow:
+
+```bash
+# 1. Register user
+POST /auth/register
+{
+  "username": "foodlover",
+  "email": "food@example.com",
+  "password": "Password123",
+  "fullName": "Food Lover",
+  "phone": "+201234567890"
+}
+
+# 2. Login
+POST /auth/login
+{
+  "identifier": "foodlover",
+  "password": "Password123"
+}
+# Copy the token from response
+
+# 3. Get recommendations (use token in Authorization header)
+GET /user/recommendations
+Authorization: Bearer <your-token>
+
+# 4. Follow a restaurant
+POST /follow/507f1f77bcf86cd799439011
+Authorization: Bearer <your-token>
+```
+
+---
+
+## 🚢 Deployment
+
+### Production Checklist
+
+- [ ] Set strong `JWT_SECRET` in production
+- [ ] Use MongoDB Atlas for production database
+- [ ] Enable CORS with specific origins
+- [ ] Add rate limiting
+- [ ] Enable HTTPS
+- [ ] Set up monitoring (PM2, New Relic, etc.)
+- [ ] Configure proper logging
+- [ ] Set up CI/CD pipeline
+
+### Build for Production
+
+```bash
+pnpm build
+pnpm start:prod
+```
+
+### Docker Deployment (Optional)
+
+```dockerfile
+FROM node:23-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN pnpm install --frozen-lockfile
+COPY . .
+RUN pnpm build
+EXPOSE 3000
+CMD ["node", "dist/main"]
+```
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open Pull Request
+
+---
+
+## 📝 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 👤 Author
+
+**Your Name**
+- GitHub: [@yourusername](https://github.com/yourusername)
+- Email: your.email@example.com
+
+---
+
+## 🙏 Acknowledgments
+
+- NestJS team for the amazing framework
+- MongoDB team for powerful database features
+- Faker.js for realistic test data
+
+---
+
+## 📞 Support
+
+For issues and questions:
+- 📧 Email: support@pleny.com
+- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/pleny-restaurant-api/issues)
+- 📚 Docs: [Swagger Documentation](http://localhost:3000/api/docs)
+
+---
+
+**⭐ Star this repo if you find it helpful!**
+
+---
+
+## 📊 Database Schema Overview
+
+### Collections
+
+```
+Users
+├── _id
+├── username (unique)
+├── email (unique)
+├── phone (unique)
+├── password (hashed)
+├── fullName
+├── role (user/admin)
+├── preferences
+│   ├── favoriteCuisinesIds[]
+│   ├── darkMode
+│   └── language
+└── profile
+    ├── bio
+    ├── totalFollowing
+    └── socialLinks
+
+Restaurants
+├── _id
+├── nameEn
+├── nameAr
+├── slug (unique)
+├── cuisinesIds[] (1-3 cuisines)
+├── location (GeoJSON Point)
+├── totalFollowers
+├── createdById
+└── descriptions (En/Ar)
+
+Cuisines
+├── _id
+├── name (unique)
+├── slug (unique)
+├── description
+└── isActive
+
+Follows
+├── _id
+├── userId (ref: User)
+├── restaurantId (ref: Restaurant)
+└── timestamps
+```
+
+---
+
+**Built with ❤️ using NestJS and MongoDB**
